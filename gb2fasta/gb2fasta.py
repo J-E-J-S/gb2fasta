@@ -31,8 +31,13 @@ def cli(file):
         count += 1
 
     # convert .gb to .fasta
-    SeqIO.convert(file, 'genbank', outFile + '.fasta', 'fasta')
-    return
+    # checks for errors in gb file
+    try:
+        SeqIO.convert(file, 'genbank', outFile + '.fasta', 'fasta')
+    except ValueError:
+        click.echo('An error has occurred, check .gb fidelity.')
+        os.remove(outFile + '.fasta')
+        return
 
 if __name__ == '__main__':
     cli()
