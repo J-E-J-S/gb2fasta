@@ -3,13 +3,13 @@ import sys
 import click
 from Bio import SeqIO
 
-file = r'C:/Users/James/Documents/gb2fasta/gb2fasta/pRS315.gb'
-
-def parseGb(file):
+@click.command()
+@click.argument('file')
+def cli(file):
 
     # extracts original genbank file name
     outFile = os.path.basename(os.path.splitext(file)[0])
-    print(outFile)
+
     # check file doesn't already exist
     count = 1
     while os.path.isfile(outFile + '.fasta'):
@@ -19,6 +19,9 @@ def parseGb(file):
             outFile = ' '.join(outFile.split()[0:-1]) + ' ({count})'.format(count=count)
         count += 1
 
+    # convert .gb to .fasta
     SeqIO.convert(file, 'genbank', outFile + '.fasta', 'fasta')
+    return
 
-parseGb(file)
+if __name__ == '__main__':
+    cli()
