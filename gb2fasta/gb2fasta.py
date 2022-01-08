@@ -7,6 +7,17 @@ from Bio import SeqIO
 @click.argument('file')
 def cli(file):
 
+    # check input file is.gb
+    if file.endswith('.gb') != True:
+        click.echo('Invalid file format.')
+        click.echo('Genbank file format only (.gb)')
+        return
+
+    # Check file exists
+    if os.path.isfile(file) != True:
+        click.echo('File does not exist.')
+        return
+
     # extracts original genbank file name
     outFile = os.path.basename(os.path.splitext(file)[0])
 
