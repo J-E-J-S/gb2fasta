@@ -45,9 +45,9 @@ def cli(file):
     count = 1
     while os.path.isfile(outFile + '.fasta'):
         if count == 1:
-            outFile = outFile + ' ({count})'.format(count=count)
+            outFile = outFile + f' ({count})'
         else:
-            outFile = ' '.join(outFile.split()[0:-1]) + ' ({count})'.format(count=count)
+            outFile = ' '.join(outFile.split()[0:-1]) + f' ({count})'
         count += 1
 
     # convert .gb to .fasta
