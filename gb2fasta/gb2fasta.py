@@ -2,6 +2,9 @@ import os
 import sys
 import click
 from Bio import SeqIO
+import warnings
+
+warnings.filterwarnings('ignore')
 
 def _getVersion(ctx,param, value):
 
@@ -28,9 +31,9 @@ def cli(file):
 
     """
     # check input file is.gb
-    if file.endswith('.gb') != True:
+    if ((file.endswith('.gbk') != True) and (file.endswith('.gbk') != True)):
         click.echo('Invalid file format.')
-        click.echo('Genbank file format only (.gb)')
+        click.echo('Genbank file format only (.gb, .gbk)')
         return
 
     # Check file exists
